@@ -38,9 +38,49 @@ window.addEventListener("DOMContentLoaded", () => {
   showTabContent();
 
 
+  //Modal
+  const modal = document.querySelector('.modal'),
+        modalTriggerBtn = document.querySelectorAll('[data-modal]');
 
+  const openModal = () => {
+    modal.classList.add('show', 'fade');
+    modal.classList.remove('hide');
+    document.body.style.overflow = 'hidden';
+    clearTimeout(timerId);
+  };
 
+  const closeModal = () => {
+    modal.classList.add('hide');
+    modal.classList.remove('show', 'fade');
+    document.body.style.overflow = '';
+  };
 
+  modalTriggerBtn.forEach(btn => {
+    btn.addEventListener('click', () => openModal());
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal || e.target.hasAttribute('data-close')) {
+      closeModal();
+    }
+  });
+
+  document.documentElement.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape' && modal.classList.contains('show')) {
+      closeModal();
+    }
+  });
+
+  const showModalByScroll = () => {
+    if (window.pageYOffset + document.documentElement.clientHeight === document.documentElement.scrollHeight) {
+      openModal();
+      window.removeEventListener('scroll', showModalByScroll);
+    }
+  };
+
+  window.addEventListener('scroll', showModalByScroll);
+
+  const timerId = setTimeout(openModal, 30000);
 
 
 
