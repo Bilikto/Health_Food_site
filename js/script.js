@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   //Modal
   const modal = document.querySelector('.modal'),
-        modalTriggerBtn = document.querySelectorAll('[data-modal]');
+    modalTriggerBtn = document.querySelectorAll('[data-modal]');
 
   const openModal = () => {
     modal.classList.add('show', 'fade');
@@ -88,11 +88,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const getTimeRemaining = (endTime) => {
     const total = Date.parse(endTime) - Date.parse(new Date()),
-          days = Math.floor(total / (1000*60*60*24)),
-          hours = Math.floor(total / (1000*60*60) % 24),
-          minutes = Math.floor((total / 1000 / 60) % 60),
-          seconds = Math.floor((total / 1000) % 60);
-          
+      days = Math.floor(total / (1000 * 60 * 60 * 24)),
+      hours = Math.floor(total / (1000 * 60 * 60) % 24),
+      minutes = Math.floor((total / 1000 / 60) % 60),
+      seconds = Math.floor((total / 1000) % 60);
+
     return {
       total,
       days,
@@ -112,25 +112,25 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const setTimer = (endTime) => {
     const timer = document.querySelector('.timer'),
-          days = timer.querySelector('#days'),
-          hours = timer.querySelector('#hours'),
-          minutes = timer.querySelector('#minutes'),
-          seconds = timer.querySelector('#seconds'),
-          timerId = setInterval(updateTimer);
-    
-      function updateTimer() {
-        const t = getTimeRemaining(endTime);
-        
-          days.textContent = getZero(t.days);
-          hours.textContent = getZero(t.hours);
-          minutes.textContent = getZero(t.minutes);
-          seconds.textContent = getZero(t.seconds);
+      days = timer.querySelector('#days'),
+      hours = timer.querySelector('#hours'),
+      minutes = timer.querySelector('#minutes'),
+      seconds = timer.querySelector('#seconds'),
+      timerId = setInterval(updateTimer);
 
-        if (t === 0) {
-          clearInterval(timerId);
-        }
+    function updateTimer() {
+      const t = getTimeRemaining(endTime);
+
+      days.textContent = getZero(t.days);
+      hours.textContent = getZero(t.hours);
+      minutes.textContent = getZero(t.minutes);
+      seconds.textContent = getZero(t.seconds);
+
+      if (t === 0) {
+        clearInterval(timerId);
       }
-      updateTimer();
+    }
+    updateTimer();
   };
 
   setTimer(deadLine);
@@ -138,21 +138,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
   //Slider
   const slider = document.querySelector('.offer__slider'),
-        prevArrow = slider.querySelector('.offer__slider-prev'),
-        nextArrow = slider.querySelector('.offer__slider-next'),
-        currentCounter = slider.querySelector('#current'), 
-        totalCounter = slider.querySelector('#total'),
-        slidesWrapper = slider.querySelector('.offer__slider-wrapper'),
-        slidesField = slider.querySelector('.offer__slider-inner'),
-        slides = slider.querySelectorAll('.offer__slide'),
-        width = window.getComputedStyle(slidesWrapper).width;
+    prevArrow = slider.querySelector('.offer__slider-prev'),
+    nextArrow = slider.querySelector('.offer__slider-next'),
+    currentCounter = slider.querySelector('#current'),
+    totalCounter = slider.querySelector('#total'),
+    slidesWrapper = slider.querySelector('.offer__slider-wrapper'),
+    slidesField = slider.querySelector('.offer__slider-inner'),
+    slides = slider.querySelectorAll('.offer__slide'),
+    width = window.getComputedStyle(slidesWrapper).width;
 
   let slidesIndex = 1,
-      offSet = 0;
+    offSet = 0;
 
   slidesField.style.width = 100 * slides.length + '%';
   slidesField.style.display = 'flex';
-  slidesField.style.transition =  '0.5s All';
+  slidesField.style.transition = '0.5s All';
 
   slidesWrapper.style.overflow = 'hidden';
 
@@ -172,11 +172,15 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const deleteNotDigits = (str) => {
+    return +str.replace(/\D/g, ''); //width.slice(0, width.length - 2)
+  };
+
   nextArrow.addEventListener('click', () => {
-    if (offSet == width.slice(0, width.length - 2) * (slides.length - 1)) {
+    if (offSet == deleteNotDigits(width) * (slides.length - 1)) { 
       offSet = 0;
     } else {
-      offSet += +width.slice(0, width.length - 2);
+      offSet += deleteNotDigits(width);
     }
 
     slidesField.style.transform = `translate(-${offSet}px)`;
@@ -192,9 +196,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   prevArrow.addEventListener('click', () => {
     if (offSet === 0) {
-      offSet = width.slice(0, width.length - 2) * (slides.length - 1);
+      offSet = deleteNotDigits(width) * (slides.length - 1);
     } else {
-      offSet -= width.slice(0, width.length - 2);
+      offSet -= deleteNotDigits(width);
     }
 
     slidesField.style.transform = `translate(-${offSet}px)`;
@@ -217,7 +221,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-  
+
 
 
 
