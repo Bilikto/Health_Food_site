@@ -18,7 +18,7 @@
     "url": "https://github.com/Bilikto/Health_Food_site/issues"
   },
   "homepage": "https://github.com/Bilikto/Health_Food_site#readme",
-  "browserlist": [
+  "browserslist": [
     ">1%"
   ],
   "devDependencies": {
