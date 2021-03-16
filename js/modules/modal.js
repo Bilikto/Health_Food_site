@@ -45,3 +45,4 @@ function modal(modalSelector, triggerSelector, modalTimerId) {
 }
 
 export default modal;
+export {openModal, closeModal};
