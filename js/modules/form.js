@@ -1,3 +1,5 @@
+import {postData} from '../services/services';
+
 function form(formSelector, modalSelector, timerId) {
   //Forms
   const forms = document.querySelectorAll(formSelector);
@@ -11,22 +13,6 @@ function form(formSelector, modalSelector, timerId) {
   forms.forEach(form => {
     bindPostData(form);
   });
-
-  async function postData(url, data) {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-      body: data
-    });
-
-    if (!response.ok) {
-      throw new Error(`Could not fetch ${url}, status ${response.status}`)
-    }
-
-    return await response.json();
-  }
 
   function bindPostData(form) {
     form.addEventListener('submit', (e) => {
