@@ -1,4 +1,5 @@
 import {postData} from '../services/services';
+import {openModal, closeModal} from '../modules/modal';
 
 function form(formSelector, modalSelector, timerId) {
   //Forms
@@ -43,7 +44,7 @@ function form(formSelector, modalSelector, timerId) {
         .finally(() => {
           form.reset();
         });
-    })
+    });
   }
 
   function showThanksModal(message) {
