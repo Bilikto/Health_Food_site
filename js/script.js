@@ -5,11 +5,12 @@ import slider from './modules/slider';
 import calculator from './modules/calculator';
 import menuCard from './modules/menuCard';
 import form from './modules/form';
+import {openModal} from './modules/modal';
 
 
 window.addEventListener("DOMContentLoaded", () => {
 
-  const timerId = setTimeout(openModal, 50000);
+  const timerId = setTimeout(() => openModal('.modal', timerId), 50000);
 
   tab('.tabheader__items', '.tabheader__item', '.tabcontent', 'tabheader__item_active');
   modal('.modal', '[data-modal]', timerId);
