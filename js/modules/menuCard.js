@@ -51,4 +51,4 @@ function menuCard() {
     });
 }
 
-export default menuCard();
+export default menuCard;
