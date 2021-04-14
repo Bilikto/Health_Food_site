@@ -40,8 +40,12 @@ function timer(parentSelector, deadLine) {
       minutes.textContent = getZero(t.minutes);
       seconds.textContent = getZero(t.seconds);
 
-      if (t == 0) {
+      if (t.total <= 0) {
         clearInterval(timerId);
+        days.textContent = '00';
+        hours.textContent = '00';
+        minutes.textContent = '00';
+        seconds.textContent = '00';
       }
     }
     updateTimer();
